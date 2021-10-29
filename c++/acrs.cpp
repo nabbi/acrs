@@ -1,4 +1,4 @@
-/* acrs-demo.cpp - Demo program for the ACRS library
+/* acrs.cpp - Demo program for the ACRS library
  *
  * Copyright 2011 Patrick F. Allen
  *
@@ -470,7 +470,7 @@ void usage()
             "Automatic classless route summarization (ACRS) demo program\n"
             "Usage:\n"
             "\n"
-            "       ./acrs-demo [-46lh] [-m STYLE] PREFIX [PREFIX ...]\n"
+            "       ./acrs [-46lh] [-m STYLE] PREFIX [PREFIX ...]\n"
             "\n"
             "       PREFIX consists of <NETWORK>/<PREFLEN>[m<METRIC>]\n"
             "\n"
@@ -478,8 +478,8 @@ void usage()
             "       PREFLEN is the prefix length.\n"
             "       METRIC is the route's metric (this is optional, default is 0).\n"
             "\n"
-            "       Example usage:  ./acrs-demo 192.168.0.0/24m1 192.168.1.0/24\n"
-            "                       ./acrs-demo -6 2001:db8::/128 2001:db8::1/128\n"
+            "       Example usage:  ./acrs 192.168.0.0/24m1 192.168.1.0/24\n"
+            "                       ./acrs -6 2001:db8::/128 2001:db8::1/128\n"
             "\n"
             "       Options:\n"
             "       -l    Enables logging\n"

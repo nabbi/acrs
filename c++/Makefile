@@ -3,11 +3,11 @@ include Makefile.inc
 TEST_DIR="test"
 .PHONY : test
 
-acrs-demo: addr.o addr4.o addrnetform.o addr6netform.o addr4netform.o addr6.o route.o route4.o route6.o acrs-demo.o
-	$(CXX) $(CXXFLAGS) -o acrs-demo addr4.o addr6.o addrnetform.o addr6netform.o addr4netform.o addr.o route4.o route6.o route.o acrs-demo.o
+acrs: addr.o addr4.o addrnetform.o addr6netform.o addr4netform.o addr6.o route.o route4.o route6.o acrs.o
+	$(CXX) $(CXXFLAGS) -o acrs addr4.o addr6.o addrnetform.o addr6netform.o addr4netform.o addr.o route4.o route6.o route.o acrs.o
 
-acrs-demo.o: acrs-demo.cpp acrs.hpp addr.hpp route.hpp route4.hpp addr4.hpp route6.hpp addr6.hpp addr6netform.hpp addr4netform.hpp addrnetform.hpp
-	$(CXX) $(CXXFLAGS) -c acrs-demo.cpp
+acrs.o: acrs.cpp acrs.hpp addr.hpp route.hpp route4.hpp addr4.hpp route6.hpp addr6.hpp addr6netform.hpp addr4netform.hpp addrnetform.hpp
+	$(CXX) $(CXXFLAGS) -c acrs.cpp
 
 addr4.o: addr4.cpp addr4.hpp addr.hpp addr4netform.hpp
 	$(CXX) $(CXXFLAGS) -c addr4.cpp
@@ -40,7 +40,7 @@ test:
 	make test -C $(TEST_DIR)
 
 clean:
-	rm -f *.o acrs-demo
+	rm -f *.o acrs
 	make clean -C $(TEST_DIR)
 
-all: acrs-demo test
+all: acrs test
