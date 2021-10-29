@@ -59,9 +59,9 @@ namespace IP
         bool isValidSnmaskOnce(const uint32_t num) const;
         uint32_t onBits(uint32_t mask) const;
 
-        virtual int getAddrFamily() const {};
-        virtual int getAddrStrLen() const {};
-        virtual bool setSnmaskFromPlen(const uint32_t plen) {};
+        virtual int getAddrFamily() const { return 0; };
+        virtual int getAddrStrLen() const { return 0; };
+        virtual bool setSnmaskFromPlen(const uint32_t plen) { return 0; };
 
         /* Converts network form data (in_addr_t, in6_addr) into a presentation
          * form string using the provided function to get the network form
@@ -80,19 +80,19 @@ namespace IP
         }
 
     public:
-        virtual int getMaxPlen() const {};
+        virtual int getMaxPlen() const { return 0; };
         virtual void printAll(std::ostream & os) const {};
         bool isValidPlen(const uint32_t plen) const;
 
-        virtual std::string getAddrP() const {};
-        virtual std::string getNetworkP() const {};
-        virtual std::string getHostmaskP() const {};
-        virtual std::string getBroadcastP() const {};
+        virtual std::string getAddrP() const { return 0; };
+        virtual std::string getNetworkP() const { return 0; };
+        virtual std::string getHostmaskP() const { return 0; };
+        virtual std::string getBroadcastP() const { return 0; };
         uint32_t getPlen() const;
         /* Subnet mask in presentation form is for v4 only */
 
         /* Set functions */
-        virtual bool setAddr(const std::string & addr) {};
+        virtual bool setAddr(const std::string & addr) { return 0; };
         bool setPlen(const uint32_t plen);
 
         /* Helper functions */
