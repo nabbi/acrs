@@ -18,6 +18,20 @@
 
 from ip4route import IP4Route
 from ip4addr import IP4Addr
+from functools import cmp_to_key
+
+
+# emulate cmp from Python 2
+def cmp(v1, v2):
+    if (v1 < v2):
+        return -1
+    elif (v1 == v2):
+        return 0
+    elif (v1 > v2):
+        return 1
+
+def my_cmp(a, b):
+    return cmp(int(b + a), int(a + b))
 
 def summarize(rtlist):
     if (rtlist.__class__.__name__ != "list"):
@@ -74,11 +88,11 @@ def _cmp_main(rt1, rt2):
         rt2.__class__.__name__ != "IP4Route"):
         raise TypeError
 
-    c1 = cmp(rt1.getMetric(), rt2.getMetric())
+    c1 = my_cmp(rt1.getMetric(), rt2.getMetric())
 
     # Reverse sort using * -1 to get prefix length in descending order
-    c2 = cmp(rt1.getPlen(), rt2.getPlen()) * -1
-    c3 = cmp(rt1.getNetwork()[1], rt2.getNetwork()[1])
+    c2 = my_cmp(rt1.getPlen(), rt2.getPlen()) * -1
+    c3 = my_cmp(rt1.getNetwork()[1], rt2.getNetwork()[1])
 
     # Python's OR logic will return the first non-zero value,
     # or the value of c3
@@ -88,7 +102,7 @@ def _summarize_main(rtlist):
     summarized = False
     low = None
 
-    rtlist = sorted(rtlist, cmp=_cmp_main)
+    rtlist = sorted(rtlist, key=cmp_to_key(_cmp_main))
 
     for high in rtlist:
         if (low == None):
@@ -146,9 +160,9 @@ def _cmp_overlap(rt1, rt2):
         rt2.__class__.__name__ != "IP4Route"):
         raise TypeError
 
-    c1 = cmp(rt1.getNetwork()[1], rt2.getNetwork()[1])
-    c2 = cmp(rt1.getPlen(), rt2.getPlen())
-    c3 = cmp(rt1.getMetric(), rt2.getMetric())
+    c1 = my_cmp(rt1.getNetwork()[1], rt2.getNetwork()[1])
+    c2 = my_cmp(rt1.getPlen(), rt2.getPlen())
+    c3 = my_cmp(rt1.getMetric(), rt2.getMetric())
 
     # Python's OR logic will return the first non-zero value,
     # or the value of c3
@@ -159,7 +173,7 @@ def _remove_overlap(rtlist):
     low = None
     newrts = []
 
-    rtlist = sorted(rtlist, cmp=_cmp_overlap)
+    rtlist = sorted(rtlist, key=cmp_to_key(_cmp_overlap))
 
     newrts.append(rtlist[0])
 

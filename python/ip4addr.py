@@ -301,12 +301,12 @@ class IP4Addr(object):
     def printAll(self):
         ret = self.isValid()
 
-        print "Valid:", self.isValid()
+        print ("Valid:", self.isValid())
 
         if (ret == True):
-            print "Addr:", self.getAddr()
-            print "Mask:", self.getMask()
-            print "Bcast:", self.getBroadcast()
-            print "Hmask:", self.getHostmask()
-            print "Net:", self.getNetwork()
-            print "Plen:", self.getPlen()
+            print ("Addr:", self.getAddr())
+            print ("Mask:", self.getMask())
+            print ("Bcast:", self.getBroadcast())
+            print ("Hmask:", self.getHostmask())
+            print ("Net:", self.getNetwork())
+            print ("Plen:", self.getPlen())

@@ -68,8 +68,8 @@ class IP4Route(ip4addr.IP4Addr):
 
     def printAll(self):
         if (self.isValid() == False):
-            print "Valid: False"
+            print ("Valid: False")
             return
         else:
             super(self.__class__, self).printAll()
-            print "Metric:", self.getMetric()
+            print ("Metric:", self.getMetric())
